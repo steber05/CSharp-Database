@@ -1,0 +1,3 @@
+Download the 2010 version(I installed both)
+to force install use command prompt
+filename.exe /passive

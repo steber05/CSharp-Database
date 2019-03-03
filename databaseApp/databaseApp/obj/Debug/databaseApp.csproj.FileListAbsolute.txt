@@ -1,0 +1,10 @@
+D:\code\local\C#\wintec\databaseApp\databaseApp\bin\Debug\databaseApp.exe.config
+D:\code\local\C#\wintec\databaseApp\databaseApp\bin\Debug\databaseApp.exe
+D:\code\local\C#\wintec\databaseApp\databaseApp\bin\Debug\databaseApp.pdb
+D:\code\local\C#\wintec\databaseApp\databaseApp\obj\Debug\databaseApp.csprojAssemblyReference.cache
+D:\code\local\C#\wintec\databaseApp\databaseApp\obj\Debug\databaseApp.Form1.resources
+D:\code\local\C#\wintec\databaseApp\databaseApp\obj\Debug\databaseApp.Properties.Resources.resources
+D:\code\local\C#\wintec\databaseApp\databaseApp\obj\Debug\databaseApp.csproj.GenerateResource.cache
+D:\code\local\C#\wintec\databaseApp\databaseApp\obj\Debug\databaseApp.csproj.CoreCompileInputs.cache
+D:\code\local\C#\wintec\databaseApp\databaseApp\obj\Debug\databaseApp.exe
+D:\code\local\C#\wintec\databaseApp\databaseApp\obj\Debug\databaseApp.pdb
