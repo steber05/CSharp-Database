@@ -25,10 +25,11 @@ namespace databaseApp
             InitializeComponent();
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        //Default actions when loading the application
+        private void Form1_Load(object sender, EventArgs e)
         {
-            Application.Exit();
-        }
+            connectToolStripMenuItem.PerformClick();
+        }//End of default loading proccess
 
         private void connectToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -36,42 +37,33 @@ namespace databaseApp
             {
                 conn = new OleDbConnection(connString);
                 conn.Open();
-                disconnectToolStripMenuItem.Enabled=true;
-                connectToolStripMenuItem.Enabled=false;
+                disconnectToolStripMenuItem.Enabled = true;
+                connectToolStripMenuItem.Enabled = false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-        }
+        }//End of connect function
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            connectToolStripMenuItem.PerformClick();
-        }
-
-        private void disconnectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            conn.Close();
-            disconnectToolStripMenuItem.Enabled = false;
-            connectToolStripMenuItem.Enabled = true;
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            disconnectToolStripMenuItem.PerformClick();
-        }
-
+        //Start query
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            runTableQuery();
-            if(validEntry)
+            if(conn.State == ConnectionState.Open)
             {
-                runIDQuery();
+                runTableQuery();
+                if (validEntry && textBox2.Text != "")
+                {
+                    runIDQuery();
+                }
+            }
+            else
+            {
+                MessageBox.Show("No connection to database");
             }
             this.Cursor = Cursors.Default;
-        }
+        }//End of query
 
         private void runTableQuery()
         {
@@ -132,7 +124,7 @@ namespace databaseApp
                 }
 
             }
-        }
+        }//End of runTableQuery
 
         private void runIDQuery()
         {
@@ -177,20 +169,42 @@ namespace databaseApp
                     MessageBox.Show(errorMsg);
                 }
             }   
-        }
+        }//End of runIDQuery
 
-        private void tableButton_Click(object sender, EventArgs e)
+        //Disconnect button
+        private void disconnectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-            runTableQuery();
-            this.Cursor = Cursors.Default;
-        }
+            try
+            {
+                conn.Close();
+                //Have error checked and this function does close the connection
+                //Added this to disable the connection completely until connection is re-established
+                conn.Dispose();
+                disconnectToolStripMenuItem.Enabled = false;
+                connectToolStripMenuItem.Enabled = true;
+                textBox1.Text = "";
+                textBox2.Text = "";
+                results.DataSource = null;
+                results2.DataSource = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }//End of disconnect
 
-        private void button1_Click(object sender, EventArgs e)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-            runIDQuery();
-            this.Cursor = Cursors.Default;
-        }
+            Application.Exit();
+        }//End of exit function
+
+        //Default actions when closing the application
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            disconnectToolStripMenuItem.PerformClick();
+        }//End of default closing function
+
+
     }
 }
