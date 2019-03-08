@@ -50,6 +50,7 @@ namespace databaseApp
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
+            //Checks for a connection to database
             if(conn.State == ConnectionState.Open)
             {
                 runTableQuery();
@@ -76,6 +77,7 @@ namespace databaseApp
             }
             else
             {
+                //Check user input
                 switch (check)
                 {
                     case "commodity":
@@ -103,6 +105,7 @@ namespace databaseApp
                         break;
                 }
             }
+            //Run query if there is a valid input
             if (validEntry)
             {
                 try
@@ -176,8 +179,8 @@ namespace databaseApp
         {
             try
             {
-                conn.Close();
                 //Have error checked and this function does close the connection
+                conn.Close();             
                 //Added this to disable the connection completely until connection is re-established
                 conn.Dispose();
                 disconnectToolStripMenuItem.Enabled = false;
@@ -204,7 +207,5 @@ namespace databaseApp
         {
             disconnectToolStripMenuItem.PerformClick();
         }//End of default closing function
-
-
     }
 }
